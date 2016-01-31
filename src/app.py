@@ -1,8 +1,8 @@
 from flask import Flask, jsonify
-from scraper import *
+from .scraper import *
 
 
-app = Flask(__name__)
+app = Flask('mtg-price-fetcher')
 
 @app.route('/cards/<cardname>') 
 def fetch_card_price(cardname):
@@ -10,6 +10,3 @@ def fetch_card_price(cardname):
     print(result)
 
     return jsonify(result)
-
-if __name__ == '__main__':
-    app.run()
