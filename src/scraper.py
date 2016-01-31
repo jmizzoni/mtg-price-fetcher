@@ -34,7 +34,6 @@ def card_page_from_name(name):
     else:
         return None
     
-    print(query_url)
     return htmldom.HtmlDom(query_url)
 
 def scrape_price(card_page):
