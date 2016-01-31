@@ -48,8 +48,6 @@ def get_card_price(name, set=None):
     
     card_page = card_page_from_name(name)
 
-    result = scrape_price(card_page)
-    print(result)
-    
-    return result
+    return scrape_price(card_page)
+
 

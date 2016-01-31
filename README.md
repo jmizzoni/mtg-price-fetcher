@@ -11,7 +11,14 @@ A simple REST API for fetching pricing data on Magic: The Gathering Cards from M
 ```
 http://host.url/cards/<cardname>
 ```
-
+Return Format (JSON):
+```
+{
+    avg:  "$00.00"
+    high: "$00.00"
+    low:  "$00.00"
+}
+```
 ** More to come! ** 
 
 
