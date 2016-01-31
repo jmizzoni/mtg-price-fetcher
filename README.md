@@ -14,10 +14,13 @@ http://host.url/cards/<cardname>
 Return Format (JSON):
 ```
 {
-    avg:  "$00.00"
-    high: "$00.00"
-    low:  "$00.00"
-}
+    "name": "Card Name",
+    "set":  "Card Set",
+    "prices": {
+        "avg":  "$00.00"
+        "high": "$00.00"
+        "low":  "$00.00"
+    }
 ```
 ** More to come! ** 
 

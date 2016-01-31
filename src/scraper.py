@@ -38,9 +38,17 @@ def card_page_from_name(name):
 
 def scrape_price(card_page):
     card_page.createDom() 
+    card_name = card_page.find('h2 > a').text()
+    card_set = card_page.find('h5 > a').text()
     price_keys = ['low', 'avg', 'high']
     price_values = [elem.text() for elem in card_page.find('.priceheader')]
-    return dict(zip(price_keys, price_values))
+    
+    return {
+        "name": card_name,
+        "set": card_set,
+        "prices" : dict(zip(price_keys, price_values))
+    }
+
             
 
 def get_card_price(name, set=None):
