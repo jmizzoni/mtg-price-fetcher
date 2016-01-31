@@ -22,39 +22,38 @@ def get_card_url_from_search_results(search_url, name):
     return MTGSTOCKS_BASE_URL + result_links.first().attr('href')
 
 
-def card_page_from_name(name):
+def card_url_from_name(name):
     query_url = generate_search_url(name)
-    print('QUERYING {}'.format(query_url))
     response = requests.get(query_url, allow_redirects=False)
 
     if (response.status_code in range(301, 307)):
-        query_url = response.headers['Location']
+        return response.headers['Location']
     elif (response.status_code == requests.codes.ok):
-        query_url = get_card_url_from_search_results(query_url, name)
-    else:
-        return None
-    
-    return htmldom.HtmlDom(query_url)
+        return get_card_url_from_search_results(query_url, name)
 
-def scrape_price(card_page):
+    return None
+
+def scrape_price(card_url):
+    card_page = htmldom.HtmlDom(card_url)
     card_page.createDom() 
     card_name = card_page.find('h2 > a').text()
     card_set = card_page.find('h5 > a').text()
+
     price_keys = ['low', 'avg', 'high']
     price_values = [elem.text() for elem in card_page.find('.priceheader')]
     
     return {
         "name": card_name,
         "set": card_set,
+        "link": card_url,
         "prices" : dict(zip(price_keys, price_values))
     }
 
             
 
 def get_card_price(name, set=None):
-    
-    card_page = card_page_from_name(name)
+    card_url = card_url_from_name(name)
 
-    return scrape_price(card_page)
+    return scrape_price(card_url)
 
 
