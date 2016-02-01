@@ -42,7 +42,7 @@ def scrape_price(card_url):
     price_keys = ['avg']
     
     if len(price_values) > 1:
-        price_keys.append(['low', 'high'])
+        price_keys.extend(['low', 'high'])
     
     return {
         'name': card_name,
