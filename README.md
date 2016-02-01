@@ -17,15 +17,16 @@ Return Format (JSON):
     "name": "Card Name",
     "set":  "Card Set",
     "link": "http://mtgstocks.com/prints/<card-id>"
+    "promo": false
     "prices": {
         "avg":  "$00.00"
         "high": "$00.00"
         "low":  "$00.00"
-        "foil": ""
     }
 ```
 
-The `foil` field will be blank in most cases. When it is not, it means that the card found is a printing only available in foil, such as an FTV or Duel Deck. MTGStocks doesn't list high, average and low prices in this case, so those fields will be blank instead. 
+The `promo` field indicates whether or not the card returned by the search is a printing that is only available in foil, such as a Duel Deck or FTV foil. In this case, the `high` and `low` fields will be blank. Why MTGStocks does this eludes me.
+
 **More to come!** 
 
 
