@@ -16,13 +16,14 @@ Return Format (JSON):
 {
     "name": "Card Name",
     "set":  "Card Set",
+    "link": "http://mtgstocks.com/prints/<card-id>"
     "prices": {
         "avg":  "$00.00"
         "high": "$00.00"
         "low":  "$00.00"
     }
 ```
-** More to come! ** 
+**More to come!** 
 
 
 ## Disclaimer
