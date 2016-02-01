@@ -2,8 +2,8 @@ from htmldom import htmldom
 import requests
 import urllib
 
-MTGSTOCKS_BASE_URL = "http://www.mtgstocks.com"
-QUERY_STRING = "/cards/search?utf8=%E2%9C%93&print%5Bcard%5D={}&button="
+MTGSTOCKS_BASE_URL = 'http://www.mtgstocks.com'
+QUERY_STRING = '/cards/search?utf8=%E2%9C%93&print%5Bcard%5D={}&button='
 
 def generate_search_url(name):
     formatted_name = urllib.parse.quote('+'.join(name.split(' ')), '/+')
@@ -47,10 +47,10 @@ def scrape_price(card_url):
     }
     
     return {
-        "name": card_name,
-        "set": card_set,
-        "link": card_url,
-        "prices" : prices
+        'name': card_name,
+        'set': card_set,
+        'link': card_url,
+        'prices' : prices
     }
 
             
