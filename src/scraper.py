@@ -1,4 +1,6 @@
 from htmldom import htmldom
+from fuzzywuzzy import process
+from html import unescape
 import requests
 import urllib
 
@@ -15,12 +17,12 @@ def get_card_url_from_search_results(search_url, name):
     results_page.createDom()
     result_links = results_page.find('.table > tbody > tr > td > a')
 
-    for result in result_links:
-        if result.text().lower() == name.lower():
-            return MTGSTOCKS_BASE_URL + result.attr('href')
-        
-    return MTGSTOCKS_BASE_URL + result_links.first().attr('href')
+    #fuzzy string match to disambiguate the results
+    possible_names = [result.text() for result in result_links   ]
+    best_match = process.extractOne(name, possible_names)
+    match_index = possible_names.index(best_match[0])
 
+    return MTGSTOCKS_BASE_URL + result_links[match_index].attr('href')
 
 def card_url_from_name(name):
     query_url = generate_search_url(name)
@@ -35,25 +37,25 @@ def card_url_from_name(name):
 
 def scrape_price(card_url):
     card_page = htmldom.HtmlDom(card_url)
-    card_page.createDom() 
+    card_page.createDom()
     card_name = card_page.find('h2 > a').text()
     card_set = card_page.find('h5 > a').text()
     price_values = [elem.text() for elem in card_page.find('.priceheader')]
     price_keys = ['avg']
-    
+
     if len(price_values) > 1:
         price_keys.insert(0, 'low')
         price_keys.append('high')
-    
+
     return {
-        'name': card_name,
-        'set': card_set,
+        'name': unescape(card_name),
+        'set': unescape(card_set),
         'link': card_url,
         'promo': len(price_keys) == 1,
         'prices' : dict(zip(price_keys, price_values))
     }
 
-            
+
 
 def get_card_price(name, set=None):
     card_url = card_url_from_name(name)
