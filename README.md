@@ -6,10 +6,12 @@ A simple REST API for fetching pricing data on Magic: The Gathering Cards from M
 
 ## Usage
 
+Arguments aare provided by way of URL query paramteters
+
 ### Search by card name
 
 ```
-http://host.url/cards/<cardname>
+http://host.url/cards?name=<cardname>
 ```
 Return Format (JSON):
 ```
@@ -25,10 +27,18 @@ Return Format (JSON):
     }
 ```
 
+### Specify a Printing
+
+```
+http://host.url/cards?name=<cardname>&set=<setname>
+```
+
 The `promo` field indicates whether or not the card returned by the search is a printing that is only available in foil, such as a Duel Deck or FTV foil. In this case, the `high` and `low` fields will be blank. Why MTGStocks does this eludes me.
 
 **More to come!** 
 
+## Todos
+- Add foil pricing
 
 ## Disclaimer
 
